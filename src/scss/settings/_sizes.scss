@@ -1,0 +1,15 @@
+// container
+$container-width: 90vw;
+$container-max-width: 1500px;
+
+//header
+$header-height: 15vh;
+$header-min-height: 100px;
+$header-max-height: 500px;
+
+
+// fonts
+$font-size-base: $header-height / 6;
+$min-font-size-base: $header-min-height / 6;
+$font-size-logo: $header-height / 3;
+$min-font-size-logo: $header-min-height / 3;

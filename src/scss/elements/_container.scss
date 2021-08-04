@@ -1,0 +1,7 @@
+@import "../settings/index";
+
+.container {
+  width: $container-width;
+  max-width: $container-max-width;
+  display: flex;
+}
