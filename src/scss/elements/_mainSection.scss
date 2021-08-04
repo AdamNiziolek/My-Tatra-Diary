@@ -1,0 +1,11 @@
+@import "../settings/index";
+
+.main-section {
+  width: 100vw;
+  height: 80vh;
+  position: relative;
+  background-image: url("../images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}

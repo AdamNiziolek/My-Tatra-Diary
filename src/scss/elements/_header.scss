@@ -10,6 +10,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 5px 20px 4px rgba(0,0,0,0.70);
+  position: relative;
+  z-index: 2;
 
   .container {
     justify-content: space-between;
@@ -100,15 +103,17 @@
         top: $header-height;
         right: 0;
         transform: translateY(-500px);
-        transition: 0.3s 0.1s ease-in-out;
+        transition: 0.7s 0.1s ease-in-out;
+        z-index: 1;
       }
 
       .header-nav-active {
         visibility: visible;
         transform: translateY(0px);
-        transition: 0.3s 0.1s ease-in-out;
+        transition: 0.7s 0.1s ease-in-out;
         display: flex;
         justify-content: center;
+        z-index: 1;
       }
 
       .hamburger, .header-nav .header-nav-active {
@@ -138,8 +143,22 @@
         transition: 0.3s;
       }
 
+      &:active {
+        i {
+          &::after {
+            font-family: "Font Awesome 5 Free";
+            content: "\f023";
+          }
+        }
+      }
+
       i {
         padding-left: 0.5 * $font-size-base;
+
+        &::after {
+          font-family: "Font Awesome 5 Free";
+          content: "\f09c";
+        }
       }
     }
 

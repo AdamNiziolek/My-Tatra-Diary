@@ -8,7 +8,7 @@ export default function Navigation({active}) {
                 <li>Add a new entry</li>
                 <li>Inspirations</li>
                 <li>Log out
-                    <i className="fas fa-unlock log-out-icon"/>
+                    <i className="log-out-icon"/>
                 </li>
             </ul>
         </nav>
