@@ -1,0 +1,40 @@
+{
+  "entries": [
+    {
+      "id": 1,
+      "date": "01.01.2019",
+      "timeStart": "7:32",
+      "timeEnd": "14:32",
+      "goal": "Giewont",
+      "photo": "../scss/images/photo1.jpg",
+      "entry": "It was a great winter day. Wonderful snow was everywhere. Fortunately, there was not much snow and it was possible to walk efficiently. For dinner, I had a really tasty boletus soup. I must go back there in the future."
+    },
+    {
+      "id": 2,
+      "date": "01.01.2019",
+      "timeStart": "7:32",
+      "timeEnd": "14:32",
+      "goal": "Giewont",
+      "photo": "../scss/images/photo1.jpg",
+      "entry": "It was a great winter day. Wonderful snow was everywhere. Fortunately, there was not much snow and it was possible to walk efficiently. For dinner, I had a really tasty boletus soup. I must go back there in the future."
+    },
+    {
+      "id": 3,
+      "date": "01.01.2019",
+      "timeStart": "7:32",
+      "timeEnd": "14:32",
+      "goal": "Giewont",
+      "photo": "../scss/images/photo1.jpg",
+      "entry": "It was a great winter day. Wonderful snow was everywhere. Fortunately, there was not much snow and it was possible to walk efficiently. For dinner, I had a really tasty boletus soup. I must go back there in the future."
+    },
+    {
+      "id": 4,
+      "date": "01.01.2019",
+      "timeStart": "7:32",
+      "timeEnd": "14:32",
+      "goal": "Giewont",
+      "photo": "../scss/images/photo1.jpg",
+      "entry": "It was a great winter day. Wonderful snow was everywhere. Fortunately, there was not much snow and it was possible to walk efficiently. For dinner, I had a really tasty boletus soup. I must go back there in the future."
+    }
+  ]
+}
