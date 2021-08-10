@@ -1,22 +1,29 @@
 import './scss/app.scss';
 import React from "react";
-// import {
-//     BrowserRouter as Router,
-//     Switch,
-//     Route,
-//     Link
-// } from "react-router-dom";
-import Header from './components/Header';
-import MainSection from './components/MainSection';
-import Footer from './components/Footer';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
+import Home from './components/Home';
+import AddEntry from './components/AddEntry';
+import Statistics from './components/Statistics';
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      <MainSection/>
-      <Footer/>
-    </div>
+      <Router>
+        <Switch>
+          <Route path="/add">
+              <AddEntry />
+          </Route>
+          <Route path="/statistics">
+              <Statistics />
+          </Route>
+          <Route path="/">
+              <Home />
+          </Route>
+        </Switch>
+      </Router>
   );
 }
 

@@ -25,6 +25,8 @@
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
+      color: $color-text;
+      text-decoration: none;
 
       .logo-text {
         padding-left: $font-size-logo / 2;
@@ -137,6 +139,11 @@
       font-weight: 600;
       padding: $font-size-base / 1.3;
       transition: background-color 0.3s ease-in-out;
+
+      .link {
+        color: $color-text;
+        text-decoration: none;
+      }
 
       &:hover {
         background-color: $color-header-hover;
