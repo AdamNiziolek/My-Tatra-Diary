@@ -1,13 +1,13 @@
 import React from "react";
 import Header from './Header';
-import MainSection from './MainSection';
+import AddEntryForm from './AddEntryForm';
 import Footer from './Footer';
 
 function AddEntry() {
     return (
         <div className="App">
             <Header/>
-            <MainSection/>
+            <AddEntryForm/>
             <Footer/>
         </div>
     );
