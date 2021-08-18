@@ -1,0 +1,48 @@
+@import "../settings/index";
+
+.statistics-container {
+  width: auto;
+  height: auto;
+  background: $color-entry-background;
+  border-radius: 30px;
+  color: $color-text;
+  font-family: $font-logo;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow 0.3s ease-in-out;
+  font-size: $font-size-entry;
+  padding: 50px;
+  @media (max-width: 700px) {
+    height: 80vw;
+    font-size: 6vw;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: $font-size-entry * 1.8;
+    margin-bottom: 20px;
+    @media (max-width: 500px) {
+      font-size: 11vw;
+    }
+  }
+
+  ul {
+    list-style: circle inside;
+    @media (max-width: 700px) {
+      list-style: none;
+      text-align: center;
+    }
+
+    li {
+      padding: 10px;
+      font-size: $font-size-entry * 1.2;
+      @media (max-width: 700px) {
+        font-size: 6.5vw;
+      }
+    }
+  }
+
+
+}

@@ -1,9 +1,9 @@
 import React from "react";
 const API = "http://localhost:3000";
-
+//.env
 
 export default function Entry(props) {
-    let {id, date, timeStart, timeEnd, goal, photo, entry} = props.entry;
+    let {id, date, timeStart, timeEnd, goal, entry} = props.entry;
         
     const handleDelete = (e) => {
         fetch(`${API}/entries/${id}`, {

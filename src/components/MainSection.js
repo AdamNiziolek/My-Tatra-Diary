@@ -8,7 +8,6 @@ export default function MainSection() {
         fetch(`${API}/db`)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setEntries(data.entries);
             })
             .catch(error => {
