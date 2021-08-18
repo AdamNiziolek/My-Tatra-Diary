@@ -5,7 +5,6 @@ const API = "http://localhost:3000";
 export default function MainSection() {
     const [entries, setEntries] = useState([]);
     useEffect(()=> {
-        console.log('?')
         fetch(`${API}/db`)
             .then(response => response.json())
             .then(data => {

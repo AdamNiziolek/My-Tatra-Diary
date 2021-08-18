@@ -14,8 +14,10 @@ export default function Navigation({active}) {
                 <li>
                     <Link to="/statistics" className="link">Statistics</Link>
                 </li>
-                <li>Log out
-                    <i className="log-out-icon"/>
+                <li>
+                    <div className="link">Log out
+                        <i className="log-out-icon"/>
+                    </div>                    
                 </li>
             </ul>
         </nav>
