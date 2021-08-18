@@ -11,7 +11,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  position: relative;
   @media (max-width: 1100px) {
     flex-direction: column;
     height: auto;
@@ -25,8 +26,33 @@
     margin-bottom: 4vh;
   }
 
+  .entry-delete {
+    position: absolute;
+    padding: 10px;
+    top: 20px;
+    right: 20px;
+    visibility: hidden;
+    font-size: $font-size-logo/1.5;
+    color: rgba(0,0,0,0);
+    transition: 0.3s; 
+    @media (max-width: 500px) {
+      top: 3px;
+      right: 3px;
+    }    
+  }
+
   &:hover {
     box-shadow: 0 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    
+    .entry-delete {       
+      color: $color-entry-trash;
+      visibility: visible;
+
+      &:hover {
+        color:$color-entry-trash-hover;
+        cursor:pointer;        
+      }
+    }
   }
 
   .entry-photo {
@@ -52,6 +78,7 @@
     @media (max-width: 1100px) {
       width: 100%;
       height: auto;
+      position: relative;
     }
 
     .entry-date {

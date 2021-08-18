@@ -1,12 +1,29 @@
 import React from "react";
+const API = "http://localhost:3000";
+
 
 export default function Entry(props) {
-    let {date, timeStart, timeEnd, goal, photo, entry} = props.entry;
-    console.log(props.entry);
+    let {id, date, timeStart, timeEnd, goal, photo, entry} = props.entry;
+        
+    const handleDelete = (e) => {
+        fetch(`${API}/entries/${id}`, {
+            method: "DELETE"
+          })
+            .then(response => {
+              window.location.reload();
+            })
+            .catch(error => {
+              console.log(error);
+            });
+    };
+
     return (
         <div className="entry-container">
             <div className="entry-photo" />
             <div className="entry-name">
+                <div className="entry-delete" onClick={handleDelete}>
+                    <i class="far fa-trash-alt"></i>
+                </div>
                 <div className="entry-date">
                     <h2>{date}</h2>
                     <div className="entry-time">
