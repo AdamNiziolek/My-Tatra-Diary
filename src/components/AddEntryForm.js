@@ -8,14 +8,12 @@ export default function AddEntryForm() {
 
     const handleChange = (e) => {
         const {name, value} = e.target;
-        setForm(prevState => {
-            return {
+        setForm(prevState => ({
                 ...prevState,
                 [name]: value
-            }
-        });
+            }));
     };
-
+//formik, final-form
     const handleSubmit = (e) => {
         e.preventDefault();
         const {date, timeEnd, timeStart, goal, entry} = form;

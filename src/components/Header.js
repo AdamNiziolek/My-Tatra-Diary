@@ -12,7 +12,7 @@ export default function Header() {
                     <i className="fas fa-book-open logo-icon"/>
                     <h2 className="logo-text">My Tatra Diary</h2>
                 </Link>
-                <HamburgerButton setNavActive={setNavActive}/>
+                <HamburgerButton setNavActive={setNavActive} />
                 <Navigation active={navActive}/>
             </div>
         </header>

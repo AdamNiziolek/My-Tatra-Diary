@@ -7,8 +7,9 @@ export default function MainSection() {
     useEffect(()=> {
         fetch(`${API}/db`)
             .then(response => response.json())
-            .then(data => {
-                setEntries(data.entries);
+            .then(({entries}) => {
+                setEntries(entries);
+                console.log(entries);
             })
             .catch(error => {
                 console.log(error);

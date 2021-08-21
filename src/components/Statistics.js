@@ -10,8 +10,8 @@ function Statistics() {
     useEffect(()=> {
         fetch(`${API}/db`)
             .then(response => response.json())
-            .then(data => {
-                setEntries(data.entries);
+            .then(({entries}) => {
+                setEntries(entries);
             })
             .catch(error => {
                 console.log(error);
@@ -22,7 +22,7 @@ function Statistics() {
         <div className="App">
             <Header/>
             <section className="main-section">
-                {entries.length ? <StatisticsSection entry={entries}/> : <p>loading...</p>}
+                {entries.length ? <StatisticsSection entries={entries}/> : <p>loading...</p>}
             </section>
             <Footer/>
         </div>

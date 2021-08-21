@@ -13,7 +13,7 @@
   color: white;
   font-size: $font-size-base/1.3;
 
-  a {
+  &__link {
     text-decoration: none;
     color: $color-text;
     padding: (20vh - $header-height - $font-size-base/2) / 2;
