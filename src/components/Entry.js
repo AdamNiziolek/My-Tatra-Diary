@@ -10,7 +10,7 @@ export default function Entry(props) {
             method: "DELETE"
           })
             .then(response => {
-              window.location.reload();
+              props.setDeletion(!props.deletion);
             })
             .catch(error => {
               console.log(error);
