@@ -9,7 +9,6 @@
   position: relative;
   background-image: url("../images/background.jpg");
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   z-index: 0;
@@ -17,4 +16,7 @@
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
+  @media (max-width: 700px) {
+    background-image: url("../images/background2.jpg");
+  }
 }
