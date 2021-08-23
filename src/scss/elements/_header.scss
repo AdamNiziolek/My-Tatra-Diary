@@ -27,9 +27,13 @@
       cursor: pointer;
       color: $color-text;
       text-decoration: none;
+      @media (max-width: 700px) {
+        font-size: $font-size-logo / 1.2;
+      }
 
       .logo-text {
         padding-left: $font-size-logo / 2;
+        margin: 0;
       }
     }
 

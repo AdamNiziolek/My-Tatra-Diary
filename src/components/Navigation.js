@@ -1,7 +1,21 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React from "react"; 
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom";
+
 //classNames
+
 export default function Navigation({active}) {
+    const { logout } = useAuth();
+    const history = useHistory();
+
+    async function handleLogout() {
+        try {
+            await logout();
+            history.push('/login');
+        } catch {
+        }
+    }
+
     return (
         <nav className={active ? 'header-nav header-nav-active': 'header-nav'}>
             <ul className="header-nav-list">
@@ -15,7 +29,7 @@ export default function Navigation({active}) {
                     <Link to="/statistics" className="link">Statistics</Link>
                 </li>
                 <li>
-                    <div className="link">Log out
+                    <div className="link" onClick={handleLogout}>Log out
                         <i className="log-out-icon"/>
                     </div>                    
                 </li>
