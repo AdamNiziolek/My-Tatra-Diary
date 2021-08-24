@@ -1,25 +1,24 @@
 import React from "react";
-const API = "http://localhost:3000";
-//.env
+import { db } from '../firebase'
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Entry(props) {
-    let {id, date, timeStart, timeEnd, goal, entry} = props.entry;
-        
+    let {id, date, timeStart, timeEnd, goal, entry, photo} = props.entry;
+    const { currentUser } = useAuth();
+    
     const handleDelete = (e) => {
-        fetch(`${API}/entries/${id}`, {
-            method: "DELETE"
-          })
-            .then(response => {
-              props.setDeletion(!props.deletion);
-            })
-            .catch(error => {
-              console.log(error);
-            });
+        e.preventDefault();
+
+        db.collection(currentUser.email).doc(id).delete().then(() => {
+            props.setDeletion(!props.deletion);
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
     };
 
     return (
         <div className="entry-container">
-            <div className="entry-photo" />
+            <img className="entry-photo" src={photo} alt="Tatra Mountains" />
             <div className="entry-name">
                 <div className="entry-delete" onClick={handleDelete}>
                     <i class="far fa-trash-alt"></i>

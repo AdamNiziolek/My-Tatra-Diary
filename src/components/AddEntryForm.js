@@ -1,10 +1,13 @@
 import React, {useState} from "react";
-const API = "http://localhost:3000";
+import { storage, db } from '../firebase'
+import { useAuth } from '../contexts/AuthContext';
 
 export default function AddEntryForm() {
     const [form, setForm] = useState({ date:"", timeStart:"", timeEnd:"", goal:"", entry:"" });
     const [entryError, setError] = useState(false);
     const [entrySend, setEntrySend] = useState(false);
+    const [fileURL, setFileURL] = React.useState(null)
+    const { currentUser } = useAuth();
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -14,26 +17,32 @@ export default function AddEntryForm() {
             }));
     };
 //formik, final-form
+
+    const onChange = async (e) => {
+        const file = e.target.files[0]
+        const storageRef = storage.ref('img/' + file.name)
+        const fileRef = storageRef.child(file.name)
+        await fileRef.put(file)
+        setFileURL(await fileRef.getDownloadURL())
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const {date, timeEnd, timeStart, goal, entry} = form;
         if (date.length > 0 && timeStart.length > 0 && timeEnd.length > 0 && goal.length > 0 && entry.length > 0 && entry.length < 251 && goal.length < 51) {
-            fetch(`${API}/entries`, {
-                method: "POST",
-                body: JSON.stringify(form),
-                headers: {
-                    "Content-Type": "application/json"
-                }
+            db
+            .collection(currentUser.email)
+            .add({
+                date, 
+                timeEnd, 
+                timeStart, 
+                goal, 
+                entry,
+                photo: fileURL
             })
-                .then(response => response.json())
-                .then(data => {
-                    setError(false);
-                    setEntrySend(true);
-                    setForm({ date:"", timeStart:"", timeEnd:"", goal:"", entry:"" });
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            setError(false);
+            setEntrySend(true);
+            setForm({ date:"", timeStart:"", timeEnd:"", goal:"", entry:"" });
         } else {
             setError(true);
             setEntrySend(false);
@@ -71,7 +80,7 @@ export default function AddEntryForm() {
                 </div>
                 <div className="form-photo form-div">
                     <label>Photo
-                        <input className="form-photo-input" type="file" onChange={handleChange}/>
+                        <input className="form-photo-input" type="file" onChange={onChange}/>
                     </label>
                 </div>
                 <div className="btn" onClick={handleSubmit}>Save entry </div>
