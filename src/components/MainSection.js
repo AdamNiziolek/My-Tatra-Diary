@@ -18,7 +18,7 @@ export default function MainSection() {
                 setEntries(prevState => [...prevState, entry]);
             });
         });
-    },[deletion]);
+    },[deletion, currentUser]);
 
     return (
         <section className="main-section">

@@ -19,7 +19,7 @@ function Statistics() {
                 setEntries(prevState => [...prevState, entry]);
             });
         });
-    },[]);
+    },[currentUser]);
 
     return (
         <div className="App">
