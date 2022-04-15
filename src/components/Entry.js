@@ -1,4 +1,5 @@
 import React from "react";
+import { doc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import { useAuth } from '../contexts/AuthContext';
 
@@ -8,12 +9,9 @@ export default function Entry(props) {
     
     const handleDelete = (e) => {
         e.preventDefault();
-
-        db.collection(currentUser.email).doc(id).delete().then(() => {
-            props.setDeletion(!props.deletion);
-        }).catch((error) => {
-            console.error("Error removing document: ", error);
-        });
+        deleteDoc(doc(db, currentUser.email, id))
+        .then(() => props.setDeletion(!props.deletion))
+        .catch((error) => console.error("Error removing document: ", error));
     };
 
     return (

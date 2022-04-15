@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from './Header';
 import StatisticsSection from './StatisticsSection';
 import Footer from './Footer';
+import { collection, getDocs } from "firebase/firestore"; 
 import { db } from '../firebase'
 import { useAuth } from '../contexts/AuthContext';
 
@@ -12,13 +13,15 @@ function Statistics() {
 
     useEffect(()=> {
         setEntries('');
-        db.collection(currentUser.email).get().then((querySnapshot) => {
+        async function getDocuments() {
+            const querySnapshot = await getDocs(collection(db, currentUser.email));
             querySnapshot.forEach((doc) => {
                 const entry = doc.data();
                 entry.id = doc.id;
                 setEntries(prevState => [...prevState, entry]);
             });
-        });
+        }
+        getDocuments();
     },[currentUser]);
 
     return (

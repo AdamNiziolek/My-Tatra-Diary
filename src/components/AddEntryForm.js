@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore"; 
 import { storage, db } from '../firebase'
 import { useAuth } from '../contexts/AuthContext';
 
@@ -12,37 +14,43 @@ export default function AddEntryForm() {
     const handleChange = (e) => {
         const {name, value} = e.target;
         setForm(prevState => ({
-                ...prevState,
-                [name]: value
-            }));
+            ...prevState,
+            [name]: value
+        }));
     };
-//formik, final-form
 
     const onChange = async (e) => {
-        const file = e.target.files[0]
-        const storageRef = storage.ref('img/' + file.name)
-        const fileRef = storageRef.child(file.name)
-        await fileRef.put(file)
-        setFileURL(await fileRef.getDownloadURL())
+        const file = e.target.files[0];
+        const fileRef = ref(storage, `images/${file.name}`);
+        uploadBytes(fileRef, file)
+        .then(() => {
+            getDownloadURL(ref(storage, `images/${file.name}`))
+            .then((url) => {
+                setFileURL(url);
+            })
+            .catch((error) => console.log(error));
+        });                
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const {date, timeEnd, timeStart, goal, entry} = form;
+        const { date, timeEnd, timeStart, goal, entry } = form;
         if (date.length > 0 && timeStart.length > 0 && timeEnd.length > 0 && goal.length > 0 && entry.length > 0 && entry.length < 251 && goal.length < 51) {
-            db
-            .collection(currentUser.email)
-            .add({
-                date, 
-                timeEnd, 
-                timeStart, 
-                goal, 
-                entry,
-                photo: fileURL
-            })
-            setError(false);
-            setEntrySend(true);
-            setForm({ date:"", timeStart:"", timeEnd:"", goal:"", entry:"" });
+            try {
+                await addDoc(collection(db, currentUser.email), {
+                    date, 
+                    timeEnd, 
+                    timeStart, 
+                    goal, 
+                    entry,
+                    photo: fileURL
+                });
+                setError(false);
+                setEntrySend(true);
+                setForm({ date:"", timeStart:"", timeEnd:"", goal:"", entry:"" });
+            } catch (e) {
+            console.error("Error adding document: ", e);
+            }
         } else {
             setError(true);
             setEntrySend(false);

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import Entry from "./Entry";
 import { db } from '../firebase'
+import { collection, getDocs } from "firebase/firestore"; 
 import { useAuth } from '../contexts/AuthContext';
 
 export default function MainSection() {
@@ -9,15 +10,17 @@ export default function MainSection() {
     const [deletion, setDeletion] = useState(false);
     const { currentUser } = useAuth();
 
-    useEffect(()=> {
+    useEffect(() => {
         setEntries('');
-        db.collection(currentUser.email).get().then((querySnapshot) => {
+        async function getDocuments() {
+            const querySnapshot = await getDocs(collection(db, currentUser.email));
             querySnapshot.forEach((doc) => {
                 const entry = doc.data();
                 entry.id = doc.id;
                 setEntries(prevState => [...prevState, entry]);
             });
-        });
+        }
+        getDocuments();
     },[deletion, currentUser]);
 
     return (
