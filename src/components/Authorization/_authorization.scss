@@ -1,0 +1,93 @@
+@import '../../styles/settings/index';
+
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-image: url('../../assets/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 700px) {
+    background-image: url('../../assets/background.jpg');
+  }
+
+  .card {
+    width: auto;
+    height: auto;
+    background: $color-entry-background;
+    border-radius: 30px;
+    color: $color-text;
+    font-family: $font-text;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 0.3s ease-in-out;
+    font-size: $font-size-entry;
+    padding: 40px;
+    @media (max-width: 700px) {
+      font-size: 6vw;
+      padding: 20px;
+    }
+
+    h2 {
+      font-family: $font-logo;
+      font-size: $font-size-entry * 1.8;
+      margin-bottom: 20px;
+      text-align: center;
+      @media (max-width: 500px) {
+        font-size: 11vw;
+      }
+    }
+
+    .alert {
+      font-size: $font-size-entry/1.7;
+      text-align: center;
+    }
+
+    Form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      label {
+        font-family: $font-logo;
+      }
+
+      input {
+        margin-bottom: 20px;
+      }
+
+      .signIn-btn {
+        width: 50%;
+        height: 60px;
+        margin: 20px 0;
+      }
+
+      .reset-btn {
+        width: auto;
+        height: 60px;
+        margin: 20px 0;
+      }
+    }
+
+    .login-link {
+      font-size: $font-size-entry/1.6;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .margin {
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -1,0 +1,124 @@
+@import '../../../../styles/settings/index';
+
+.entry-container {
+  margin-top: 4vh;
+  width: 80vw;
+  height: 30vh;
+  background: $color-entry-background;
+  border-radius: 30px;
+  color: $color-text;
+  font-family: $font-logo;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    height: auto;
+  }
+
+  &:last-of-type {
+    margin-top: 7vh;
+  }
+
+  &:first-of-type {
+    margin-bottom: 4vh;
+  }
+
+  .entry-delete {
+    position: absolute;
+    padding: 10px;
+    top: 20px;
+    right: 20px;
+    visibility: hidden;
+    font-size: $font-size-logo/1.5;
+    color: rgba(0, 0, 0, 0);
+    transition: 0.3s;
+    @media (max-width: 500px) {
+      top: 3px;
+      right: 3px;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+
+    .entry-delete {
+      color: $color-entry-trash;
+      visibility: visible;
+
+      &:hover {
+        color: $color-entry-trash-hover;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .entry-photo {
+    object-fit: cover;
+    border-radius: 30px 0 0 30px;
+    width: 30vw;
+    height: 100%;
+    @media (max-width: 1100px) {
+      width: 100%;
+      min-height: 30vh;
+      border-radius: 30px 30px 0 0;
+    }
+  }
+
+  .entry-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    @media (max-width: 1100px) {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+    .entry-date {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+
+      h2 {
+        font-size: $font-size-entry * 2;
+        margin-top: $font-size-logo / 4;
+        @media (max-width: 500px) {
+          font-size: 10vw;
+        }
+      }
+
+      .entry-time {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+          font-size: $font-size-entry;
+          padding: 0 20px;
+          @media (max-width: 500px) {
+            font-size: 7vw;
+          }
+        }
+      }
+    }
+
+    .entry-track {
+      font-size: $font-size-entry;
+      padding: 20px;
+      font-family: $font-logo;
+    }
+
+    .entry-text {
+      font-size: $font-size-entry;
+      padding: 0 20px 20px 20px;
+      line-height: 1.15em;
+      text-align: justify;
+    }
+  }
+}
