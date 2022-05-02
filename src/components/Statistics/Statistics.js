@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import Header from '../Header/Header';
 import StatisticsSection from './StatisticsSection/StatisticsSection';
 import Footer from '../Footer/Footer';
 import { db } from '../../utils/firebase';
 import { useAuth } from '../../contexts/AuthContext';
 
-function Statistics() {
+export default function Statistics() {
   const [entries, setEntries] = useState([]);
   const { currentUser } = useAuth();
 
   useEffect(() => {
     setEntries('');
-    async function getDocuments() {
-      const querySnapshot = await getDocs(collection(db, currentUser.email));
-      querySnapshot.forEach((doc) => {
-        const entry = doc.data();
-        entry.id = doc.id;
-        setEntries((prevState) => [...prevState, entry]);
-      });
-    }
-    getDocuments();
+    (async function getEntries() {
+      try {
+        const q = query(collection(db, currentUser.email), orderBy('date', 'asc'));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          const entry = doc.data();
+          entry.id = doc.id;
+          setEntries((prevState) => [...prevState, entry]);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }());
   }, [currentUser]);
 
   return (
@@ -43,5 +47,3 @@ function Statistics() {
     </div>
   );
 }
-
-export default Statistics;

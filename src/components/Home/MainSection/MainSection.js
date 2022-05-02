@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
-import Entry from './Entry/Entry';
+import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../../../utils/firebase';
+import Entry from './Entry/Entry';
 import { useAuth } from '../../../contexts/AuthContext';
 
 export default function MainSection() {
@@ -12,27 +12,31 @@ export default function MainSection() {
 
   useEffect(() => {
     setEntries('');
-    async function getDocuments() {
-      const querySnapshot = await getDocs(collection(db, currentUser.email));
-      querySnapshot.forEach((doc) => {
-        const entry = doc.data();
-        entry.id = doc.id;
-        setEntries((prevState) => [...prevState, entry]);
-      });
-    }
-    getDocuments();
+    (async function getEntries() {
+      try {
+        const q = query(collection(db, currentUser.email), orderBy('date', 'asc'));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          const entry = doc.data();
+          entry.id = doc.id;
+          setEntries((prevState) => [...prevState, entry]);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }());
   }, [deletion, currentUser]);
 
   return (
     <section className="main-section">
       {entries.length ? (
-        entries.map((entry, index) => (
-            <Entry
-              entry={entry}
-              setDeletion={setDeletion}
-              deletion={deletion}
-              key={index}
-            />
+        entries.map((record, index) => (
+          <Entry
+            record={record}
+            setDeletion={setDeletion}
+            deletion={deletion}
+            key={index}
+          />
         ))
       ) : (
         <div className="noEntry-section">
