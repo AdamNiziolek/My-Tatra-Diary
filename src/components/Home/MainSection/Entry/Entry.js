@@ -3,15 +3,18 @@ import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../../../utils/firebase';
 import { useAuth } from '../../../../contexts/AuthContext';
 
-export default function Entry(props) {
-  const { id, date, timeStart, timeEnd, goal, entry, photo } = props.entry;
+export default function Entry({ record, setDeletion, deletion }) {
+  const { id, date, timeStart, timeEnd, goal, entry, photo } = record;
   const { currentUser } = useAuth();
 
-  const handleDelete = (e) => {
-    e.preventDefault();
-    deleteDoc(doc(db, currentUser.email, id))
-      .then(() => props.setDeletion(!props.deletion))
-      .catch((error) => console.error('Error removing document: ', error));
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    try {
+      await deleteDoc(doc(db, currentUser.email, id));
+      setDeletion(!deletion);
+    } catch (error) {
+      console.error('Error removing document: ', error);
+    }
   };
 
   return (

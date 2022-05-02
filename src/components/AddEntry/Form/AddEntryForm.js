@@ -16,6 +16,7 @@ export default function AddEntryForm() {
   const [entrySend, setEntrySend] = useState(false);
   const [fileURL, setFileURL] = React.useState(null);
   const { currentUser } = useAuth();
+  const { date, timeEnd, timeStart, goal, entry } = form;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,9 +28,10 @@ export default function AddEntryForm() {
 
   const onChange = async (event) => {
     const file = event.target.files[0];
-    const fileRef = ref(storage, `images/${file.name}`);
+    const { name } = file;
+    const fileRef = ref(storage, `images/${name}`);
     uploadBytes(fileRef, file).then(() => {
-      getDownloadURL(ref(storage, `images/${file.name}`))
+      getDownloadURL(ref(storage, `images/${name}`))
         .then((url) => {
           setFileURL(url);
         })
@@ -39,16 +41,16 @@ export default function AddEntryForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { date, timeEnd, timeStart, goal, entry } = form;
-    if (
-      date.length > 0 &&
-      timeStart.length > 0 &&
-      timeEnd.length > 0 &&
-      goal.length > 0 &&
-      entry.length > 0 &&
+    const validation =
+      date &&
+      timeStart &&
+      timeEnd &&
+      goal &&
+      entry &&
       entry.length < 251 &&
-      goal.length < 51
-    ) {
+      goal.length < 51;
+
+    if (validation) {
       try {
         await addDoc(collection(db, currentUser.email), {
           date,
@@ -80,7 +82,7 @@ export default function AddEntryForm() {
             <input
               type="date"
               name="date"
-              value={form.date}
+              value={date}
               onChange={handleChange}
             />
           </label>
@@ -91,7 +93,7 @@ export default function AddEntryForm() {
             <input
               type="time"
               name="timeStart"
-              value={form.timeStart}
+              value={timeStart}
               onChange={handleChange}
             />
           </label>
@@ -102,7 +104,7 @@ export default function AddEntryForm() {
             <input
               type="time"
               name="timeEnd"
-              value={form.timeEnd}
+              value={timeEnd}
               onChange={handleChange}
             />
           </label>
@@ -115,7 +117,7 @@ export default function AddEntryForm() {
               type="text"
               name="goal"
               placeholder="Max 50 characters"
-              value={form.goal}
+              value={goal}
               onChange={handleChange}
             />
           </label>
@@ -126,7 +128,7 @@ export default function AddEntryForm() {
             <textarea
               name="entry"
               placeholder="Max 250 characters"
-              value={form.entry}
+              value={entry}
               onChange={handleChange}
             />
           </label>
@@ -144,12 +146,12 @@ export default function AddEntryForm() {
         <div className="btn" onClick={handleSubmit}>
           Save entry{' '}
         </div>
-        {entryError === true && (
+        {entryError && (
           <div className="entry-statement">
             The fields were filled in incorrectly.
           </div>
         )}
-        {entrySend === true && (
+        {entrySend && (
           <div className="entry-statement">
             The entry has been added to the diary.
           </div>

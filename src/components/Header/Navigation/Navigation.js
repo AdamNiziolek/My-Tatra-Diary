@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import classNames from 'classnames';
 import { useAuth } from '../../../contexts/AuthContext';
-
-// classNames
 
 export default function Navigation({ active }) {
   const { logout } = useAuth();
   const history = useHistory();
+  const className = classNames({
+    'header-nav': true,
+    'header-nav-active': active,
+  });
 
   async function handleLogout() {
     try {
@@ -18,7 +21,7 @@ export default function Navigation({ active }) {
   }
 
   return (
-    <nav className={active ? 'header-nav header-nav-active' : 'header-nav'}>
+    <nav className={className}>
       <ul className="header-nav-list">
         <li>
           <Link to="/" className="link">
